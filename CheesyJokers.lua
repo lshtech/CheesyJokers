@@ -2,13 +2,14 @@
 --- MOD_NAME: Cheesy Jokers
 --- MOD_ID: CheesyJokers
 --- MOD_AUTHOR: [ilikecheese]
---- MOD_DESCRIPTION: Might as well make my own joker pack since so may other people are doing it. 
+--- MOD_DESCRIPTION: Might as well make my own joker pack since so many other people are doing it. 
 --- BADGE_COLOUR: C9A926
 
 ----------------------------------------------
 ------------MOD CODE -------------------------
 
 function SMODS.INIT.CheesyJokers()
+
     local joker_sprites = SMODS.Sprite:new('new_jokers', SMODS.findModByID("CheesyJokers").path, "sprites.png", 71, 95, "asset_atli")
     joker_sprites:register()
 
@@ -456,6 +457,219 @@ function SMODS.INIT.CheesyJokers()
                 card.ability.extra.odds} end,
             blueprint_compat = true,
             eternal_compat = true
+        },
+        {
+            name = "Slingshot",
+            slug = 'cj_slingshot',
+            desc = {
+                "Gains {X:red,C:white}X#2#{} Mult per hand,",
+                "only activates when in the",
+                "rightmost {C:attention}Joker{} slot,",
+                "and {C:attention}resets{} upon activation",
+                "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"
+            },
+            config = {
+                extra = {
+                    Xmult = 1,
+                    Xmult_mod = 0.5
+                }
+            },
+            pos = {x = 0, y = 3},
+            rarity = 2,
+            cost = 7,
+            loc_def = function(card) return {
+                card.ability.extra.Xmult, 
+                card.ability.extra.Xmult_mod} end,
+            blueprint_compat = true,
+            eternal_compat = true
+        },
+        {
+            name = "Calculator",
+            slug = 'cj_calculator',
+            desc = {
+                "Gives {C:money}money{} at end of round",
+                "equal to {C:attention}first digit{} of",
+                "final {C:attention}score{} during round"
+            },
+            config = {},
+            pos = {x = 2, y = 3},
+            rarity = 2,
+            cost = 6,
+            blueprint_compat = false,
+            eternal_compat = true
+        },
+        {
+            name = "Shell Filling",
+            slug = 'cj_shell_filling',
+            desc = {
+                "Gives {C:mult}Mult{} equal to",
+                "twice the square of the",
+                "current {C:attention}Ante{} number",
+                "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)"
+            },
+            config = {},
+            pos = {x = 3, y = 3},
+            rarity = 2,
+            cost = 5,
+            loc_def = function(card) return {
+                2 * G.GAME.round_resets.ante * G.GAME.round_resets.ante} end,
+            blueprint_compat = true,
+            eternal_compat = true
+        },
+        {
+            name = "Dollar Stencil",
+            slug = 'cj_dollar_stencil',
+            desc = {
+                "Earn {C:money}$#1#{} per round for",
+                "each empty {C:attention}Joker{} slot",
+                "{s:0.8}All Stencils included",
+                "{C:inactive}(Currently {C:money}+$#2#{C:inactive})"
+            },
+            config = {
+                extra = {
+                    dollars = 4,
+                    stencils = 1
+                }
+            },
+            pos = {x = 4, y = 3},
+            rarity = 2,
+            cost = 7,
+            loc_def = function(card) return {
+                card.ability.extra.dollars,
+                card.ability.extra.stencils * card.ability.extra.dollars} end,
+            blueprint_compat = true,
+            eternal_compat = true
+        },
+        {
+            name = "Package Stencil",
+            slug = 'cj_package_stencil',
+            desc = {
+                "This Joker gains {C:mult}+#2#{} Mult",
+                "for each empty {C:attention}Joker",
+                "slot at end of round",
+                "{s:0.8}All Stencils included",
+                "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)"
+            },
+            config = {
+                extra = {
+                    mult = 0,
+                    mult_mod = 4,
+                    stencils = 1
+                }
+            },
+            pos = {x = 5, y = 3},
+            rarity = 2,
+            cost = 6,
+            loc_def = function(card) return {
+                card.ability.extra.mult,
+                card.ability.extra.mult_mod} end,
+            blueprint_compat = true,
+            eternal_compat = true
+        },
+        {
+            name = "Cheese Wedge",
+            slug = 'cj_cheese_wedge',
+            desc = {
+                "When {C:attention}Blind{} is selected,",
+                "gain {C:blue}+#1#{} Hands, and this",
+                "Joker loses {C:red}-#2#{} Hands"
+            },
+            config = {
+                extra = {
+                    hands = 4,
+                    hands_mod = 1
+                }
+            },
+            pos = {x = 6, y = 3},
+            rarity = 2,
+            cost = 6,
+            loc_def = function(card) return {
+                card.ability.extra.hands,
+                card.ability.extra.hands_mod} end,
+            blueprint_compat = true,
+            eternal_compat = false
+        },
+        {
+            name = "Macarons",
+            slug = 'cj_macarons',
+            desc = {
+                "{C:green}#2# in #1#{} chance for played",
+                "cards to give {C:money}$#4#{} when scored,",
+                "chance decreases by {C:green}#3# in #1#",
+                "at the end of each round"
+            },
+            config = {
+                extra = {
+                    odds_den = 11,
+                    odds_num = 6,
+                    odds_mod = 1,
+                    dollars = 2
+                }
+            },
+            pos = {x = 7, y = 3},
+            rarity = 3,
+            cost = 10,
+            loc_def = function(card) return {
+                card.ability.extra.odds_den,
+                card.ability.extra.odds_num * G.GAME.probabilities.normal,
+                card.ability.extra.odds_mod * G.GAME.probabilities.normal,
+                card.ability.extra.dollars} end,
+            blueprint_compat = true,
+            eternal_compat = false
+        },
+        {
+            name = "Stained Glass",
+            slug = 'cj_stained_glass',
+            desc = {
+                "Played {C:attention}Enhanced{} cards",
+                "give {X:red,C:white} X#1# {} Mult and",
+                "have a {C:green}#2# in #3#{} chance",
+                "to break when scored"
+            },
+            config = {
+                extra = {
+                    Xmult = 1.5,
+                    odds = 4
+                }
+            },
+            pos = {x = 0, y = 4},
+            rarity = 3,
+            cost = 9,
+            loc_def = function(card) return {
+                card.ability.extra.Xmult,
+                G.GAME.probabilities.normal,
+                card.ability.extra.odds} end,
+            blueprint_compat = true,
+            eternal_compat = true
+        },
+        {
+            name = "Klein Bottle",
+            slug = 'cj_klein_bottle',
+            desc = {
+                "Cards held in hand",
+                "are {C:attention}also{} scored as",
+                "if they were {C:attention}played"
+            },
+            config = {},
+            pos = {x = 1, y = 4},
+            rarity = 2,
+            cost = 6,
+            blueprint_compat = false,
+            eternal_compat = true
+        },
+        {
+            name = "Optical Illusion",
+            slug = 'cj_optical_illusion',
+            desc = {
+                "All {C:attention}Booster Packs",
+                "may contain {C:attention}Jokers"
+            },
+            config = {},
+            pos = {x = 2, y = 4},
+            rarity = 1,
+            cost = 5,
+            blueprint_compat = false,
+            eternal_compat = true
         }
     }
 
@@ -479,6 +693,10 @@ function SMODS.INIT.CheesyJokers()
         joker.loc_def = v.loc_def
         joker:register()
     end
+
+    G.centers_must_appear = {
+        'j_cj_cheese_wedge'
+    }
 
     set_sprites_ref = Card.set_sprites
     Card.set_sprites = function(self, _center, _front)
@@ -595,20 +813,20 @@ function SMODS.INIT.CheesyJokers()
             local count_rank1 = 0
             local count_rank2 = 0
             for i = 1, #context.scoring_hand do
-                if context.scoring_hand[i]:get_id() == G.GAME.current_round.treasure_card.id1 then 
+                if context.card:get_id() == G.GAME.current_round.treasure_card.id1 then 
                     count_rank1 = count_rank1 + 1 
                 elseif next(find_joker("Facial Recognition")) and 
-                context.scoring_hand[i]:is_face() and (
+                context.card:is_face() and (
                 (G.GAME.current_round.treasure_card.id1 == 11) or 
                 (G.GAME.current_round.treasure_card.id1 == 12) or 
                 (G.GAME.current_round.treasure_card.id1 == 13)) then
                     count_rank1 = count_rank1 + 1 
                 end
 
-                if context.scoring_hand[i]:get_id() == G.GAME.current_round.treasure_card.id2 then 
+                if context.card:get_id() == G.GAME.current_round.treasure_card.id2 then 
                     count_rank2 = count_rank2 + 1 
                 elseif next(find_joker("Facial Recognition")) and 
-                context.scoring_hand[i]:is_face() and (
+                context.card:is_face() and (
                 (G.GAME.current_round.treasure_card.id2 == 11) or 
                 (G.GAME.current_round.treasure_card.id2 == 12) or 
                 (G.GAME.current_round.treasure_card.id2 == 13)) then
@@ -1062,9 +1280,146 @@ function SMODS.INIT.CheesyJokers()
         end
     end
 
+    SMODS.Jokers.j_cj_slingshot.calculate = function(self, context)
+        if context.joker_main then
+            if G.jokers.cards[#G.jokers.cards] == self then
+                local mult = self.ability.extra.Xmult
+                if not context.blueprint then self.ability.extra.Xmult = 1 end
+                return {
+                    message = localize{type = 'variable', key = 'a_xmult', vars = {mult}},
+                    Xmult_mod = mult
+                }
+            elseif not context.blueprint then
+                self.ability.extra.Xmult = self.ability.extra.Xmult + self.ability.extra.Xmult_mod
+                return {
+                    message = "Charging!",
+                    colour = G.C.ORANGE
+                }
+            end
+        end
+    end
+
+    SMODS.Jokers.j_cj_shell_filling.calculate = function(self, context)
+        if context.joker_main then
+            local mult = 2 * G.GAME.round_resets.ante * G.GAME.round_resets.ante
+            return {
+                message = localize{type = 'variable', key = 'a_mult', vars = {mult}},
+                mult_mod = mult
+            }
+        end
+    end
+
+    SMODS.Jokers.j_cj_package_stencil.calculate = function(self, context)
+        if context.end_of_round and not context.individual and not context.repetition and not context.blueprint then
+            self.ability.extra.mult = self.ability.extra.mult + self.ability.extra.mult_mod * self.ability.extra.stencils
+            return {
+                message = localize('k_upgrade_ex'),
+                colour = G.C.MULT,
+                card = self
+            }
+        elseif context.joker_main and self.ability.extra.mult > 0 then
+            return {
+                message = localize{type = 'variable', key = 'a_mult', vars = {self.ability.extra.mult}},
+                mult_mod = self.ability.extra.mult, 
+                colour = G.C.MULT
+            }
+        end
+    end
+
+    SMODS.Jokers.j_cj_cheese_wedge.calculate = function(self, context)
+        if context.setting_blind and not (context.blueprint_card or self).getting_sliced then
+            G.E_MANAGER:add_event(Event({func = function()
+                ease_hands_played(self.ability.extra.hands)
+                card_eval_status_text(context.blueprint_card or self, 'extra', nil, nil, nil, {message = localize{type = 'variable', key = 'a_hands', vars = {self.ability.extra.hands}}})
+                if not context.blueprint and self.ability.extra.hands - self.ability.extra.hands_mod <= 0 then 
+                    play_sound('tarot1')
+                    self.T.r = -0.2
+                    self:juice_up(0.3, 0.4)
+                    self.states.drag.is = true
+                    self.children.center.pinch.x = true
+                    G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false, func = function()
+                        G.jokers:remove_card(self); self:remove(); self = nil; return true
+                    end}))
+                elseif not context.blueprint then
+                    self.ability.extra.hands = self.ability.extra.hands - self.ability.extra.hands_mod
+                end
+                return true 
+            end }))
+        end
+    end
+
+    SMODS.Jokers.j_cj_macarons.calculate = function(self, context)
+        if context.individual and context.cardarea == G.play then
+            if pseudorandom('macarons') < G.GAME.probabilities.normal * self.ability.extra.odds_num / self.ability.extra.odds_den then
+                G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + self.ability.extra.dollars
+                G.E_MANAGER:add_event(Event({func = (function() G.GAME.dollar_buffer = 0; return true end)}))
+                return {
+                    dollars = self.ability.extra.dollars,
+                    card = self
+                }
+            end
+        end
+        if context.end_of_round and not context.individual and not context.repetition and not context.blueprint then
+            if self.ability.extra.odds_num - self.ability.extra.odds_mod <= 0 then 
+                G.E_MANAGER:add_event(Event({func = function()
+                    play_sound('tarot1')
+                    self.T.r = -0.2
+                    self:juice_up(0.3, 0.4)
+                    self.states.drag.is = true
+                    self.children.center.pinch.x = true
+                    G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false, func = function()
+                        G.jokers:remove_card(self)
+                        self:remove()
+                        self = nil
+                        return true
+                    end })) 
+                    return true
+                end })) 
+            return {
+                message = localize('k_eaten_ex'),
+                colour = G.C.PURPLE
+            }
+            else
+                self.ability.extra.odds_num = self.ability.extra.odds_num - self.ability.extra.odds_mod
+                return {
+                    message = localize{type = 'variable', key = 'a_chips_minus', vars = {self.ability.extra.odds_mod * G.GAME.probabilities.normal}},
+                    colour = G.C.GREEN
+                }
+            end
+        end
+    end
+
+    SMODS.Jokers.j_cj_stained_glass.calculate = function(self, context)
+        if context.individual and context.cardarea == G.play and context.other_card.config.center ~= G.P_CENTERS.c_base then
+            return {
+                x_mult = self.ability.extra.Xmult,
+                colour = G.C.RED,
+                card = self
+            }
+        elseif context.destroying_card and not context.blueprint and context.destroying_card.config.center ~= G.P_CENTERS.c_base then
+            if pseudorandom('stained_glass') < G.GAME.probabilities.normal/self.ability.extra.odds then
+                context.destroying_card.ability.shatter_instead = true
+                return true
+            end
+        end
+    end
 
     calculate_joker_ref = Card.calculate_joker
     Card.calculate_joker = function(self, context)
+        local new_context = {}
+        for k, v in pairs(context) do
+            if k == scoring_hand then
+                new_context.scoring_hand = {}
+                for kk, vv in ipairs(context.scoring_hand) do
+                    if not vv.klein_bottle_scoring then new_context.scoring_hand[kk] = context.scoring_hand[kk] end
+                end
+            else
+                new_context[k] = context[k]
+            end
+        end
+        context = new_context
+
+        if self.ability.set ~= 'Joker' or self.debuff then return end
         if next(find_joker("Facial Recognition")) then
             if context.individual and context.cardarea == G.hand and not context.end_of_round then
                 if self.ability.name == 'Shoot the Moon' and context.other_card:is_face() then
@@ -1139,6 +1494,9 @@ function SMODS.INIT.CheesyJokers()
                     }
                 end
             end
+        end
+        if self.ability.name == 'To Do List' then
+            if next(find_joker("Engraving")) and context.end_of_round then return end
         end
         return calculate_joker_ref(self, context)
     end
@@ -1229,6 +1587,10 @@ function SMODS.INIT.CheesyJokers()
 
     start_dissolve_ref = Card.start_dissolve
     Card.start_dissolve = function(self, dissolve_colours, silent, dissolve_time_fac, no_juice)
+        if self.ability and self.ability.shatter_instead then
+            self:shatter()
+            return
+        end
         if self.ability and self.ability.name == 'Corrugated Iron' and self.ability.extra > 0 then
             card_eval_status_text(self, 'extra', nil, nil, nil, {
                 message = localize('$')..self.ability.extra,
@@ -1241,6 +1603,29 @@ function SMODS.INIT.CheesyJokers()
             delay(0.3)
         end
         start_dissolve_ref(self, dissolve_colours, silent, dissolve_time_fac, no_juice)
+    end
+
+    evaluate_play_ref = G.FUNCS.evaluate_play
+    G.FUNCS.evaluate_play = function(e)
+        local function edit_scoring_hand(event, line)
+            if line == 603 and debug.getinfo(2, 'S').short_src == 'functions/state_events.lua' then
+                local n, v = debug.getlocal(2, 5)
+                for i = 1, #G.hand.cards do
+                    v[#v + 1] = G.hand.cards[i]
+                    v[#v].klein_bottle_scoring = true
+                end
+                debug.setlocal(2, 5, v)
+            elseif line == 778 and debug.getinfo(2, 'S').short_src == 'functions/state_events.lua' then
+                local n, old_scoring_hand = debug.getlocal(2, 5)
+                local new_scoring_hand = {}
+                for k, v in ipairs(old_scoring_hand) do
+                    if not v.klein_bottle_scoring then new_scoring_hand[#new_scoring_hand + 1] = v end
+                end
+                debug.setlocal(2, 5, new_scoring_hand)
+            end
+        end
+        if next(find_joker('Klein Bottle')) then debug.sethook(edit_scoring_hand, "l") end
+        return evaluate_play_ref(e)
     end
 
     draw_card_ref = Card.draw
@@ -1291,6 +1676,23 @@ function SMODS.INIT.CheesyJokers()
         stop_hover_ref(self)
     end
 
+    card_update_ref = Card.update
+    Card.update = function(self, dt)
+        card_update_ref(self, dt)
+        if G.STAGE ~= G.STAGES.RUN then return end
+        if string.find(self.ability.name, "Stencil") then
+            local stencil_count = (G.jokers.config.card_limit - #G.jokers.cards)
+            for i = 1, #G.jokers.cards do
+                if string.find(G.jokers.cards[i].ability.name, "Stencil") then stencil_count = stencil_count + 1 end
+            end
+            if self.ability.name == "Joker Stencil" then 
+                self.ability.x_mult = stencil_count
+            elseif self.ability.extra.stencils then
+                self.ability.extra.stencils = stencil_count
+            end
+        end
+    end
+
     draw_cardarea_ref = CardArea.draw
     CardArea.draw = function(self)
         draw_cardarea_ref(self)
@@ -1308,6 +1710,8 @@ function SMODS.INIT.CheesyJokers()
         end
     end
 
+
+
     get_current_pool_ref = get_current_pool
     get_current_pool = function(_type, _rarity, _legendary, _append)
         if _type == 'Joker' and _append == 'sho' and not _rarity and next(find_joker("Missing Piece")) then
@@ -1315,6 +1719,17 @@ function SMODS.INIT.CheesyJokers()
         else
             return get_current_pool_ref(_type, _rarity, _legendary, _append)
         end
+    end
+
+    create_card_ref = create_card
+    create_card = function(_type, area, legendary, _rarity, skip_materialize, soulable, forced_key, key_append)
+        if area == G.pack_cards and next(find_joker("Optical Illusion")) and not forced_key and key_append ~= 'sta' then
+            if pseudorandom('optical_illusion') < 0.2 then
+                _type = 'Joker'
+                key_append = 'opt'
+            end
+        end
+        return create_card_ref(_type, area, legendary, _rarity, skip_materialize, soulable, forced_key, key_append)
     end
 
     G.localization.descriptions.AIConditions = {
@@ -1471,6 +1886,12 @@ function SMODS.INIT.CheesyJokers()
         if self.ability.name == 'High Score' and not self.debuff then
             if G.GAME.chips >= G.GAME.blind.chips * 3 then return self.ability.extra end
         end
+        if self.ability.name == 'Calculator' and not self.debuff then
+            if G.GAME.chips > 0 then return tonumber(string.sub(tostring(G.GAME.chips), 1, 1)) end
+        end
+        if self.ability.name == 'Dollar Stencil' and not self.debuff then
+            if self.ability.extra.stencils > 0 then return self.ability.extra.stencils * self.ability.extra.dollars end
+        end
         return calculate_dollar_bonus_ref(self)
     end
 
@@ -1579,19 +2000,19 @@ function SMODS.INIT.CheesyJokers()
             if context.pre_discard then return false end
             local suits = {['Hearts'] = 0, ['Diamonds'] = 0, ['Spades'] = 0, ['Clubs'] = 0}
             for i = 1, #context.scoring_hand do
-                if context.scoring_hand[i].ability.name ~= 'Wild Card' then
-                    if context.scoring_hand[i]:is_suit('Hearts') and suits["Hearts"] == 0 then suits["Hearts"] = suits["Hearts"] + 1
-                    elseif context.scoring_hand[i]:is_suit('Diamonds') and suits["Diamonds"] == 0  then suits["Diamonds"] = suits["Diamonds"] + 1
-                    elseif context.scoring_hand[i]:is_suit('Spades') and suits["Spades"] == 0  then suits["Spades"] = suits["Spades"] + 1
-                    elseif context.scoring_hand[i]:is_suit('Clubs') and suits["Clubs"] == 0  then suits["Clubs"] = suits["Clubs"] + 1 end
+                if context.card.ability.name ~= 'Wild Card' then
+                    if context.card:is_suit('Hearts') and suits["Hearts"] == 0 then suits["Hearts"] = suits["Hearts"] + 1
+                    elseif context.card:is_suit('Diamonds') and suits["Diamonds"] == 0  then suits["Diamonds"] = suits["Diamonds"] + 1
+                    elseif context.card:is_suit('Spades') and suits["Spades"] == 0  then suits["Spades"] = suits["Spades"] + 1
+                    elseif context.card:is_suit('Clubs') and suits["Clubs"] == 0  then suits["Clubs"] = suits["Clubs"] + 1 end
                 end
             end
             for i = 1, #context.scoring_hand do
-                if context.scoring_hand[i].ability.name == 'Wild Card' then
-                    if context.scoring_hand[i]:is_suit('Hearts') and suits["Hearts"] == 0 then suits["Hearts"] = suits["Hearts"] + 1
-                    elseif context.scoring_hand[i]:is_suit('Diamonds') and suits["Diamonds"] == 0  then suits["Diamonds"] = suits["Diamonds"] + 1
-                    elseif context.scoring_hand[i]:is_suit('Spades') and suits["Spades"] == 0  then suits["Spades"] = suits["Spades"] + 1
-                    elseif context.scoring_hand[i]:is_suit('Clubs') and suits["Clubs"] == 0  then suits["Clubs"] = suits["Clubs"] + 1 end
+                if context.card.ability.name == 'Wild Card' then
+                    if context.card:is_suit('Hearts') and suits["Hearts"] == 0 then suits["Hearts"] = suits["Hearts"] + 1
+                    elseif context.card:is_suit('Diamonds') and suits["Diamonds"] == 0  then suits["Diamonds"] = suits["Diamonds"] + 1
+                    elseif context.card:is_suit('Spades') and suits["Spades"] == 0  then suits["Spades"] = suits["Spades"] + 1
+                    elseif context.card:is_suit('Clubs') and suits["Clubs"] == 0  then suits["Clubs"] = suits["Clubs"] + 1 end
                 end
             end
             return suits["Hearts"] > 0 and suits["Diamonds"] > 0 and suits["Spades"] > 0 and suits["Clubs"] > 0
@@ -2136,6 +2557,14 @@ function SMODS.INIT.CheesyJokers()
             return can_use_consumeable_ref(self, any_state, skip_check)
         end
     end
+
+    G.localization.descriptions.Joker.j_stencil.text = {
+        "{X:red,C:white} X1 {} Mult for each",
+        "empty {C:attention}Joker{} slot",
+        "{s:0.8}All Stencils included",
+        "{C:inactive}(Currently {X:red,C:white} X#1# {C:inactive})"
+    }
+    init_localization()
 end
 
 ----------------------------------------------
