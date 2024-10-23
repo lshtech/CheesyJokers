@@ -566,7 +566,7 @@ SMODS.Joker{
             G.GAME.joker_buffer = G.GAME.joker_buffer + 1
             G.E_MANAGER:add_event(Event({
                 func = function()
-                    local new_card = copy_card(self, nil, nil, nil, card.edition and card.edition.negative)
+                    local new_card = copy_card(card, nil, nil, nil, card.edition and card.edition.negative)
                     new_card:add_to_deck()
                     G.jokers:emplace(new_card)
                     new_card:start_materialize()
@@ -1250,6 +1250,9 @@ SMODS.Joker{
     set_ability = function(self, card, initial, delay_sprites)
     end,
     load = function(self, card, card_table, other_card)
+    end,
+    calc_dollar_bonus = function(self, card)
+        if G.GAME.chips >= G.GAME.blind.chips * 3 then return card.ability.extra end
     end
 }
 SMODS.Joker{
@@ -1446,6 +1449,9 @@ SMODS.Joker{
     set_ability = function(self, card, initial, delay_sprites)
     end,
     load = function(self, card, card_table, other_card)
+    end,
+    calc_dollar_bonus = function(self, card)
+        if G.GAME.chips > 0 then return tonumber(string.sub(tostring(G.GAME.chips), 1, 1)) end
     end
 }
 SMODS.Joker{
@@ -1529,7 +1535,10 @@ SMODS.Joker{
     set_ability = function(self, card, initial, delay_sprites)
     end,
     load = function(self, card, card_table, other_card)
-    end
+    end,
+	calc_dollar_bonus = function(self, card)
+        if card.ability.extra.stencils > 0 then return card.ability.extra.stencils * card.ability.extra.dollars end
+	end,
 }
 SMODS.Joker{
     key = "package_stencil",
@@ -2219,20 +2228,6 @@ Card.generate_UIBox_ability_table = function(self)
     else
         return generate_UIBox_ability_table_ref(self)
     end
-end
-
-local calculate_dollar_bonus_ref = Card.calculate_dollar_bonus
-Card.calculate_dollar_bonus = function(self)
-    if self.ability.name == 'High Score' and not self.debuff then
-        if G.GAME.chips >= G.GAME.blind.chips * 3 then return self.ability.extra end
-    end
-    if self.ability.name == 'Calculator' and not self.debuff then
-        if G.GAME.chips > 0 then return tonumber(string.sub(tostring(G.GAME.chips), 1, 1)) end
-    end
-    if self.ability.name == 'Dollar Stencil' and not self.debuff then
-        if self.ability.extra.stencils > 0 then return self.ability.extra.stencils * self.ability.extra.dollars end
-    end
-    return calculate_dollar_bonus_ref(self)
 end
 
 local ease_dollars_ref = ease_dollars
