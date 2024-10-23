@@ -211,20 +211,20 @@ SMODS.Joker{
             local count_rank1 = 0
             local count_rank2 = 0
             for i = 1, #context.scoring_hand do
-                if context.card:get_id() == G.GAME.current_round.treasure_card.id1 then
+                if context.scoring_hand[i]:get_id() == G.GAME.current_round.treasure_card.id1 then
                     count_rank1 = count_rank1 + 1
                 elseif next(find_joker("Facial Recognition")) and
-                context.card:is_face() and (
+                context.scoring_hand[i]:is_face() and (
                 (G.GAME.current_round.treasure_card.id1 == 11) or
                 (G.GAME.current_round.treasure_card.id1 == 12) or
                 (G.GAME.current_round.treasure_card.id1 == 13)) then
                     count_rank1 = count_rank1 + 1
                 end
 
-                if context.card:get_id() == G.GAME.current_round.treasure_card.id2 then
+                if context.scoring_hand[i]:get_id() == G.GAME.current_round.treasure_card.id2 then
                     count_rank2 = count_rank2 + 1
                 elseif next(find_joker("Facial Recognition")) and
-                context.card:is_face() and (
+                context.scoring_hand[i]:is_face() and (
                 (G.GAME.current_round.treasure_card.id2 == 11) or
                 (G.GAME.current_round.treasure_card.id2 == 12) or
                 (G.GAME.current_round.treasure_card.id2 == 13)) then
