@@ -15,6 +15,7 @@ SMODS.Atlas({
     px = 71,
     py = 95,
 })
+--[[
 SMODS.Atlas({ 
     key = "universe",
     path = "universe.png", 
@@ -26,7 +27,7 @@ local letter_atlas = SMODS.Atlas({
     path = "letters.png", 
     px = 71,
     py = 95,
-})
+})]]
 
 SMODS.Joker{
     key = "title_card",
@@ -170,12 +171,6 @@ SMODS.Joker{
             }
         end
     end,
-    set_sprites = function(self, card, front)
-    end,
-    set_ability = function(self, card, initial, delay_sprites)
-    end,
-    load = function(self, card, card_table, other_card)
-    end
 }
 SMODS.Joker{
     key = "treasure_map",
@@ -213,7 +208,7 @@ SMODS.Joker{
             for i = 1, #context.scoring_hand do
                 if context.scoring_hand[i]:get_id() == G.GAME.current_round.treasure_card.id1 then
                     count_rank1 = count_rank1 + 1
-                elseif next(find_joker("Facial Recognition")) and
+                elseif next(find_joker("j_cj_facial_Recognition")) and
                 context.scoring_hand[i]:is_face() and (
                 (G.GAME.current_round.treasure_card.id1 == 11) or
                 (G.GAME.current_round.treasure_card.id1 == 12) or
@@ -223,7 +218,7 @@ SMODS.Joker{
 
                 if context.scoring_hand[i]:get_id() == G.GAME.current_round.treasure_card.id2 then
                     count_rank2 = count_rank2 + 1
-                elseif next(find_joker("Facial Recognition")) and
+                elseif next(find_joker("j_cj_facial_Recognition")) and
                 context.scoring_hand[i]:is_face() and (
                 (G.GAME.current_round.treasure_card.id2 == 11) or
                 (G.GAME.current_round.treasure_card.id2 == 12) or
@@ -251,12 +246,6 @@ SMODS.Joker{
             end
         end
     end,
-    set_sprites = function(self, card, front)
-    end,
-    set_ability = function(self, card, initial, delay_sprites)
-    end,
-    load = function(self, card, card_table, other_card)
-    end
 }
 SMODS.Joker{
     key = "dithered",
@@ -306,12 +295,6 @@ SMODS.Joker{
             end
         end
     end,
-    set_sprites = function(self, card, front)
-    end,
-    set_ability = function(self, card, initial, delay_sprites)
-    end,
-    load = function(self, card, card_table, other_card)
-    end
 }
 SMODS.Joker{
     key = "businessman",
@@ -356,12 +339,6 @@ SMODS.Joker{
             G.E_MANAGER:add_event(Event({func = (function() G.GAME.dollar_buffer = 0; return true end)}))
         end
     end,
-    set_sprites = function(self, card, front)
-    end,
-    set_ability = function(self, card, initial, delay_sprites)
-    end,
-    load = function(self, card, card_table, other_card)
-    end
 }
 SMODS.Joker{
     key = "corrugated_iron",
@@ -394,12 +371,6 @@ SMODS.Joker{
             card.ability.extra = 0
         end
     end,
-    set_sprites = function(self, card, front)
-    end,
-    set_ability = function(self, card, initial, delay_sprites)
-    end,
-    load = function(self, card, card_table, other_card)
-    end
 }
 SMODS.Joker{
     key = "piggy_bank",
@@ -434,12 +405,6 @@ SMODS.Joker{
             })
         end
     end,
-    set_sprites = function(self, card, front)
-    end,
-    set_ability = function(self, card, initial, delay_sprites)
-    end,
-    load = function(self, card, card_table, other_card)
-    end
 }
 SMODS.Joker{
     key = "vault",
@@ -495,12 +460,6 @@ SMODS.Joker{
             }
         end
     end,
-    set_sprites = function(self, card, front)
-    end,
-    set_ability = function(self, card, initial, delay_sprites)
-    end,
-    load = function(self, card, card_table, other_card)
-    end
 }
 SMODS.Joker{
     key = "facial_recognition",
@@ -524,14 +483,6 @@ SMODS.Joker{
     eternal_compat = true,
     blueprint_compat = false,
     perishable_compat = true,
-    calculate = function(self, card, context)
-    end,
-    set_sprites = function(self, card, front)
-    end,
-    set_ability = function(self, card, initial, delay_sprites)
-    end,
-    load = function(self, card, card_table, other_card)
-    end
 }
 SMODS.Joker{
     key = "amoeba",
@@ -581,12 +532,6 @@ SMODS.Joker{
             }
         end
     end,
-    set_sprites = function(self, card, front)
-    end,
-    set_ability = function(self, card, initial, delay_sprites)
-    end,
-    load = function(self, card, card_table, other_card)
-    end
 }
 SMODS.Joker{
     key = "unfinished",
@@ -627,12 +572,6 @@ SMODS.Joker{
             end
         end
     end,
-    set_sprites = function(self, card, front)
-    end,
-    set_ability = function(self, card, initial, delay_sprites)
-    end,
-    load = function(self, card, card_table, other_card)
-    end
 }
 SMODS.Joker{
     key = "coloured_in",
@@ -678,12 +617,6 @@ SMODS.Joker{
             end
         end
     end,
-    set_sprites = function(self, card, front)
-    end,
-    set_ability = function(self, card, initial, delay_sprites)
-    end,
-    load = function(self, card, card_table, other_card)
-    end
 }
 SMODS.Joker{
     key = "engraving",
@@ -708,14 +641,6 @@ SMODS.Joker{
     eternal_compat = true,
     blueprint_compat = false,
     perishable_compat = true,
-    calculate = function(self, card, context)
-    end,
-    set_sprites = function(self, card, front)
-    end,
-    set_ability = function(self, card, initial, delay_sprites)
-    end,
-    load = function(self, card, card_table, other_card)
-    end
 }
 SMODS.Joker{
     key = "surrealist_face",
@@ -739,14 +664,6 @@ SMODS.Joker{
     eternal_compat = true,
     blueprint_compat = false,
     perishable_compat = true,
-    calculate = function(self, card, context)
-    end,
-    set_sprites = function(self, card, front)
-    end,
-    set_ability = function(self, card, initial, delay_sprites)
-    end,
-    load = function(self, card, card_table, other_card)
-    end
 }
 SMODS.Joker{
     key = "sticker_sheet",
@@ -820,9 +737,9 @@ SMODS.Joker{
                                 table.insert(options, "c_jen_trance_ex")
                             end
                             local to_create = pseudorandom_element(options, pseudoseed('sticker'))
-                            local card = create_card('Spectral', G.consumeables, nil, nil, nil, nil, to_create)
-                            card:add_to_deck()
-                            G.consumeables:emplace(card)
+                            local new_card = create_card('Spectral', G.consumeables, nil, nil, nil, nil, to_create)
+                            new_card:add_to_deck()
+                            G.consumeables:emplace(new_card)
                             G.GAME.consumeable_buffer = 0
                             return true
                         end}))
@@ -832,12 +749,6 @@ SMODS.Joker{
             end
         end
     end,
-    set_sprites = function(self, card, front)
-    end,
-    set_ability = function(self, card, initial, delay_sprites)
-    end,
-    load = function(self, card, card_table, other_card)
-    end
 }
 SMODS.Joker{
     key = "balloon",
@@ -889,12 +800,6 @@ SMODS.Joker{
             end
         end
     end,
-    set_sprites = function(self, card, front)
-    end,
-    set_ability = function(self, card, initial, delay_sprites)
-    end,
-    load = function(self, card, card_table, other_card)
-    end
 }
 SMODS.Joker{
     key = "bitflip",
@@ -941,12 +846,6 @@ SMODS.Joker{
             }
         end
     end,
-    set_sprites = function(self, card, front)
-    end,
-    set_ability = function(self, card, initial, delay_sprites)
-    end,
-    load = function(self, card, card_table, other_card)
-    end
 }
 SMODS.Joker{
     key = "missing_piece",
@@ -970,14 +869,6 @@ SMODS.Joker{
     eternal_compat = true,
     blueprint_compat = false,
     perishable_compat = true,
-    calculate = function(self, card, context)
-    end,
-    set_sprites = function(self, card, front)
-    end,
-    set_ability = function(self, card, initial, delay_sprites)
-    end,
-    load = function(self, card, card_table, other_card)
-    end
 }
 SMODS.Joker{
     key = "vending_machine",
@@ -1029,12 +920,6 @@ SMODS.Joker{
             }
         end
     end,
-    set_sprites = function(self, card, front)
-    end,
-    set_ability = function(self, card, initial, delay_sprites)
-    end,
-    load = function(self, card, card_table, other_card)
-    end
 }
 SMODS.Joker{
     key = "ai",
@@ -1209,12 +1094,6 @@ SMODS.Joker{
             end
         end
     end,
-    set_sprites = function(self, card, front)
-    end,
-    set_ability = function(self, card, initial, delay_sprites)
-    end,
-    load = function(self, card, card_table, other_card)
-    end
 }
 SMODS.Joker{
     key = "high_score",
@@ -1243,14 +1122,6 @@ SMODS.Joker{
     eternal_compat = true,
     blueprint_compat = false,
     perishable_compat = true,
-    calculate = function(self, card, context)
-    end,
-    set_sprites = function(self, card, front)
-    end,
-    set_ability = function(self, card, initial, delay_sprites)
-    end,
-    load = function(self, card, card_table, other_card)
-    end,
     calc_dollar_bonus = function(self, card)
         if G.GAME.chips >= G.GAME.blind.chips * 3 then return card.ability.extra end
     end
@@ -1281,14 +1152,6 @@ SMODS.Joker{
     eternal_compat = true,
     blueprint_compat = false,
     perishable_compat = true,
-    calculate = function(self, card, context)
-    end,
-    set_sprites = function(self, card, front)
-    end,
-    set_ability = function(self, card, initial, delay_sprites)
-    end,
-    load = function(self, card, card_table, other_card)
-    end
 }
 SMODS.Joker{
     key = "extraterrestrial",
@@ -1354,12 +1217,6 @@ SMODS.Joker{
             end
         end
     end,
-    set_sprites = function(self, card, front)
-    end,
-    set_ability = function(self, card, initial, delay_sprites)
-    end,
-    load = function(self, card, card_table, other_card)
-    end
 }
 SMODS.Joker{
     key = "slingshot",
@@ -1412,12 +1269,6 @@ SMODS.Joker{
             end
         end
     end,
-    set_sprites = function(self, card, front)
-    end,
-    set_ability = function(self, card, initial, delay_sprites)
-    end,
-    load = function(self, card, card_table, other_card)
-    end
 }
 SMODS.Joker{
     key = "calculator",
@@ -1442,14 +1293,6 @@ SMODS.Joker{
     eternal_compat = true,
     blueprint_compat = false,
     perishable_compat = true,
-    calculate = function(self, card, context)
-    end,
-    set_sprites = function(self, card, front)
-    end,
-    set_ability = function(self, card, initial, delay_sprites)
-    end,
-    load = function(self, card, card_table, other_card)
-    end,
     calc_dollar_bonus = function(self, card)
         if G.GAME.chips > 0 then return tonumber(string.sub(tostring(G.GAME.chips), 1, 1)) end
     end
@@ -1489,12 +1332,6 @@ SMODS.Joker{
             }
         end
     end,
-    set_sprites = function(self, card, front)
-    end,
-    set_ability = function(self, card, initial, delay_sprites)
-    end,
-    load = function(self, card, card_table, other_card)
-    end
 }
 SMODS.Joker{
     key = "dollar_stencil",
@@ -1528,14 +1365,6 @@ SMODS.Joker{
     eternal_compat = true,
     blueprint_compat = true,
     perishable_compat = true,
-    calculate = function(self, card, context)
-    end,
-    set_sprites = function(self, card, front)
-    end,
-    set_ability = function(self, card, initial, delay_sprites)
-    end,
-    load = function(self, card, card_table, other_card)
-    end,
 	calc_dollar_bonus = function(self, card)
         if card.ability.extra.stencils > 0 then return card.ability.extra.stencils * card.ability.extra.dollars end
 	end,
@@ -1589,12 +1418,6 @@ SMODS.Joker{
             }
         end
     end,
-    set_sprites = function(self, card, front)
-    end,
-    set_ability = function(self, card, initial, delay_sprites)
-    end,
-    load = function(self, card, card_table, other_card)
-    end
 }
 SMODS.Joker{
     key = "cheese_wedge",
@@ -1651,12 +1474,6 @@ SMODS.Joker{
             end }))
         end
     end,
-    set_sprites = function(self, card, front)
-    end,
-    set_ability = function(self, card, initial, delay_sprites)
-    end,
-    load = function(self, card, card_table, other_card)
-    end
 }
 SMODS.Joker{
     key = "macarons",
@@ -1734,12 +1551,6 @@ SMODS.Joker{
             end
         end
     end,
-    set_sprites = function(self, card, front)
-    end,
-    set_ability = function(self, card, initial, delay_sprites)
-    end,
-    load = function(self, card, card_table, other_card)
-    end
 }
 SMODS.Joker{
     key = "stained_glass",
@@ -1788,12 +1599,6 @@ SMODS.Joker{
             end
         end
     end,
-    set_sprites = function(self, card, front)
-    end,
-    set_ability = function(self, card, initial, delay_sprites)
-    end,
-    load = function(self, card, card_table, other_card)
-    end
 }
 SMODS.Joker{
     key = "klein_bottle",
@@ -1818,14 +1623,6 @@ SMODS.Joker{
     eternal_compat = true,
     blueprint_compat = false,
     perishable_compat = true,
-    calculate = function(self, card, context)
-    end,
-    set_sprites = function(self, card, front)
-    end,
-    set_ability = function(self, card, initial, delay_sprites)
-    end,
-    load = function(self, card, card_table, other_card)
-    end
 }
 SMODS.Joker{
     key = "optical_illusion",
@@ -1849,14 +1646,6 @@ SMODS.Joker{
     eternal_compat = true,
     blueprint_compat = false,
     perishable_compat = true,
-    calculate = function(self, card, context)
-    end,
-    set_sprites = function(self, card, front)
-    end,
-    set_ability = function(self, card, initial, delay_sprites)
-    end,
-    load = function(self, card, card_table, other_card)
-    end
 }
 
 local calculate_joker_ref = Card.calculate_joker
@@ -1875,7 +1664,7 @@ Card.calculate_joker = function(self, context)
     context = new_context
 
     if self.ability.set ~= 'Joker' or self.debuff then return end
-    if next(find_joker("Facial Recognition")) then
+    if next(find_joker("j_cj_facial_recognition")) then
         if context.individual and context.cardarea == G.hand and not context.end_of_round then
             if self.ability.name == 'Shoot the Moon' and context.other_card:is_face() then
                 if context.other_card.debuff then
@@ -1951,7 +1740,7 @@ Card.calculate_joker = function(self, context)
         end
     end
     if self.ability.name == 'To Do List' then
-        if next(find_joker("Engraving")) and context.end_of_round then return end
+        if next(find_joker("j_cj_engraving")) and context.end_of_round then return end
     end
     return calculate_joker_ref(self, context)
 end
@@ -1975,7 +1764,7 @@ end
 
 local reset_mail_rank_ref = reset_mail_rank
 function reset_mail_rank()
-    if next(find_joker("Engraving")) then return end
+    if next(find_joker("j_cj_engraving")) then return end
     reset_mail_rank_ref()
 
     local valid_treasure_cards = {}
@@ -2015,25 +1804,25 @@ end
 
 local reset_ancient_card_ref = reset_ancient_card
 function reset_ancient_card()
-    if next(find_joker("Engraving")) then return end
+    if next(find_joker("j_cj_engraving")) then return end
     reset_ancient_card_ref()
 end
 
 local reset_idol_card_ref = reset_idol_card
 function reset_idol_card()
-    if next(find_joker("Engraving")) then return end
+    if next(find_joker("j_cj_engraving")) then return end
     reset_idol_card_ref()
 end
 
 local reset_castle_card_ref = reset_castle_card
 function reset_castle_card()
-    if next(find_joker("Engraving")) then return end
+    if next(find_joker("j_cj_engraving")) then return end
     reset_castle_card_ref()
 end
 
 local is_suit_ref = Card.is_suit
 Card.is_suit = function(self, suit, bypass_debuff, flush_calc)
-    if next(find_joker("Surrealist Face")) and self:is_face() then
+    if next(find_joker("j_cj_surrealist_face")) and self:is_face() then
         return true
     else
         return is_suit_ref(self, suit, bypass_debuff, flush_calc)
@@ -2046,7 +1835,7 @@ Card.start_dissolve = function(self, dissolve_colours, silent, dissolve_time_fac
         self:shatter()
         return
     end
-    if self.ability and self.ability.name == 'Corrugated Iron' and self.ability.extra > 0 then
+    if self.ability and self.ability.name == 'j_cj_corrugated_iron' and self.ability.extra > 0 then
         card_eval_status_text(self, 'extra', nil, nil, nil, {
             message = localize('$')..self.ability.extra,
             dollars = self.ability.extra,
@@ -2079,7 +1868,7 @@ G.FUNCS.evaluate_play = function(e)
             debug.setlocal(2, 5, new_scoring_hand)
         end
     end
-    if next(find_joker('Klein Bottle')) then debug.sethook(edit_scoring_hand, "l") end
+    if next(find_joker('j_cj_klein_bottle')) then debug.sethook(edit_scoring_hand, "l") end
     return evaluate_play_ref(e)
 end
 
@@ -2094,7 +1883,7 @@ Card.draw = function(self, layer)
     draw_card_ref(self, layer)
 
     if layer ~= 'shadow' and self.sprite_facing == 'front' and self.ability then
-        if self.ability.name == 'Sticker Sheet' and (self.config.center.discovered or self.bypass_discovery_center) then
+        if self.ability.name == 'j_cj_sticker_sheet' and (self.config.center.discovered or self.bypass_discovery_center) then
             self.children.center:draw_shader('voucher', nil, self.ARGS.send_to_shader)
         end
     end
@@ -2119,12 +1908,12 @@ local card_update_ref = Card.update
 Card.update = function(self, dt)
     card_update_ref(self, dt)
     if G.STAGE ~= G.STAGES.RUN then return end
-    if string.find(self.ability.name, "Stencil") then
+    if string.find(self.ability.name:lower(), "stencil") then
         local stencil_count = (G.jokers.config.card_limit - #G.jokers.cards)
         for i = 1, #G.jokers.cards do
-            if string.find(G.jokers.cards[i].ability.name, "Stencil") then stencil_count = stencil_count + 1 end
+            if string.find(G.jokers.cards[i].ability.name:lower(), "stencil") then stencil_count = stencil_count + 1 end
         end
-        if self.ability.name == "Joker Stencil" then 
+        if self.ability.name == "Joker Stencil" then
             self.ability.x_mult = stencil_count
         elseif self.ability.extra.stencils then
             self.ability.extra.stencils = stencil_count
@@ -2134,7 +1923,7 @@ end
 
 local get_current_pool_ref = get_current_pool
 get_current_pool = function(_type, _rarity, _legendary, _append)
-    if _type == 'Joker' and _append == 'sho' and not _rarity and next(find_joker("Missing Piece")) then
+    if _type == 'Joker' and _append == 'sho' and not _rarity and next(find_joker("j_cj_missing_piece")) then
         return get_current_pool_ref(_type, 0.8, _legendary, _append)
     else
         return get_current_pool_ref(_type, _rarity, _legendary, _append)
@@ -2143,7 +1932,7 @@ end
 
 local create_card_ref = create_card
 create_card = function(_type, area, legendary, _rarity, skip_materialize, soulable, forced_key, key_append)
-    if area == G.pack_cards and next(find_joker("Optical Illusion")) and not forced_key and key_append ~= 'sta' then
+    if area == G.pack_cards and next(find_joker("j_cj_optical_illusion")) and not forced_key and key_append ~= 'sta' then
         if pseudorandom('optical_illusion') < 0.2 then
             _type = 'Joker'
             key_append = 'opt'
@@ -2154,7 +1943,7 @@ end
 
 local generate_card_ui_ref = generate_card_ui
 generate_card_ui = function(_c, full_UI_table, specific_vars, card_type, badges, hide_desc, main_start, main_end)
-    if _c.name == 'AI Joker' then
+    if _c.name == 'j_cj_ai' then
         full_UI_table = {
             main = {},
             info = {},
@@ -2232,9 +2021,9 @@ end
 
 local ease_dollars_ref = ease_dollars
 ease_dollars = function(mod, instant)
-    if next(find_joker('Coupon')) and mod < 0 then
-        mod = math.min(0, mod + 2 * #find_joker('Coupon'))
-        for k, v in pairs(find_joker('Coupon')) do 
+    if next(find_joker('j_cj_coupon')) and mod < 0 then
+        mod = math.min(0, mod + 2 * #find_joker('j_cj_coupon'))
+        for k, v in pairs(find_joker('j_cj_coupon')) do 
             v:juice_up(0.3, 0.3)
             card_eval_status_text(v, 'extra', nil, nil, nil, {message = "Discount!", instant = true})
         end
