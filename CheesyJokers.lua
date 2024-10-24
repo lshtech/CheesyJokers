@@ -768,7 +768,7 @@ SMODS.Joker{
     cost = 4,
     loc_vars = function(self, info_queue, card)
     return {vars = {
-        G.GAME.probabilities.normal, 
+        G.GAME.probabilities.normal,
         card.ability.extra.odds
     }}
     end,
@@ -1623,6 +1623,35 @@ SMODS.Joker{
     eternal_compat = true,
     blueprint_compat = false,
     perishable_compat = true,
+	calculate = function(self, card, context)
+		if context.individual and context.cardarea == G.hand then
+            if context.other_card.debuff then
+                return {
+                    message = localize('k_debuffed'),
+                    colour = G.C.RED,
+                    card = card,
+                }
+            else
+                local eval = eval_card(context.other_card,
+                    { cardarea = G.play })
+                local xmult = nil
+                local xchips = nil
+                if eval.edition and eval.edition.x_mult_mod then
+                    xmult = eval.edition.x_mult_mod
+                end
+                if eval.edition and eval.edition.card.edition and eval.edition.card.edition.Xchips then
+                    xchips = eval.edition.card.edition.Xchips
+                end
+                return {
+                    h_chips = eval.chips,
+                    h_mult = eval.mult,
+                    x_mult = xmult,
+                    x_chips = xchips,
+                    card = context.other_card
+                }
+            end
+        end
+	end,
 }
 SMODS.Joker{
     key = "optical_illusion",
@@ -1651,7 +1680,7 @@ SMODS.Joker{
 local calculate_joker_ref = Card.calculate_joker
 Card.calculate_joker = function(self, context)
     local new_context = {}
-    for k, v in pairs(context) do
+    for k, _ in pairs(context) do
         if k == scoring_hand then
             new_context.scoring_hand = {}
             for kk, vv in ipairs(context.scoring_hand) do
@@ -1847,29 +1876,6 @@ Card.start_dissolve = function(self, dissolve_colours, silent, dissolve_time_fac
         delay(0.3)
     end
     start_dissolve_ref(self, dissolve_colours, silent, dissolve_time_fac, no_juice)
-end
-
-local evaluate_play_ref = G.FUNCS.evaluate_play
-G.FUNCS.evaluate_play = function(e)
-    local function edit_scoring_hand(event, line)
-        if line == 603 and debug.getinfo(2, 'S').short_src == 'functions/state_events.lua' then
-            local n, v = debug.getlocal(2, 5)
-            for i = 1, #G.hand.cards do
-                v[#v + 1] = G.hand.cards[i]
-                v[#v].klein_bottle_scoring = true
-            end
-            debug.setlocal(2, 5, v)
-        elseif line == 778 and debug.getinfo(2, 'S').short_src == 'functions/state_events.lua' then
-            local n, old_scoring_hand = debug.getlocal(2, 5)
-            local new_scoring_hand = {}
-            for k, v in ipairs(old_scoring_hand) do
-                if not v.klein_bottle_scoring then new_scoring_hand[#new_scoring_hand + 1] = v end
-            end
-            debug.setlocal(2, 5, new_scoring_hand)
-        end
-    end
-    if next(find_joker('j_cj_klein_bottle')) then debug.sethook(edit_scoring_hand, "l") end
-    return evaluate_play_ref(e)
 end
 
 local draw_card_ref = Card.draw
