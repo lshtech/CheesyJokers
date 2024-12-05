@@ -1948,7 +1948,7 @@ create_card = function(_type, area, legendary, _rarity, skip_materialize, soulab
 end
 
 local generate_card_ui_ref = generate_card_ui
-generate_card_ui = function(_c, full_UI_table, specific_vars, card_type, badges, hide_desc, main_start, main_end)
+generate_card_ui = function(_c, full_UI_table, specific_vars, card_type, badges, hide_desc, main_start, main_end, card)
     if _c.name == 'j_cj_ai' then
         full_UI_table = {
             main = {},
@@ -1964,9 +1964,9 @@ generate_card_ui = function(_c, full_UI_table, specific_vars, card_type, badges,
         localize {type = 'descriptions', set = 'AIEffects', key = G.GAME.current_round.ai_ability.effect, nodes = full_UI_table.main, vars = effect_vars}
     end
     if _c.name == 'CJ The Universe' then
-        return generate_card_ui_ref(G.P_CENTERS['cj_universe'], nil, {}, 'Joker', {card_type = 'Joker', force_rarity = true})
+        return generate_card_ui_ref(G.P_CENTERS['cj_universe'], nil, {}, 'Joker', {card_type = 'Joker', force_rarity = true}, nil, nil, nil, card)
     end
-    return generate_card_ui_ref(_c, full_UI_table, specific_vars, card_type, badges, hide_desc, main_start, main_end)
+    return generate_card_ui_ref(_c, full_UI_table, specific_vars, card_type, badges, hide_desc, main_start, main_end, card)
 end
 
 local generate_UIBox_ability_table_ref = Card.generate_UIBox_ability_table
