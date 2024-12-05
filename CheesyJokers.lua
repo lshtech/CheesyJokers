@@ -1692,7 +1692,7 @@ Card.calculate_joker = function(self, context)
     end
     context = new_context
 
-    if self.ability.set ~= 'Joker' or self.debuff then return end
+    if self.debuff then return end
     if next(find_joker("j_cj_facial_recognition")) then
         if context.individual and context.cardarea == G.hand and not context.end_of_round then
             if self.ability.name == 'Shoot the Moon' and context.other_card:is_face() then
