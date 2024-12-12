@@ -706,13 +706,13 @@ SMODS.Joker{
                                 'c_trance'
                             }
                             if (SMODS.Mods["CursedDiceSeal"] or {}).can_load then
-                                table.insert(options, "c_oops1")
+                                table.insert(options, "c_curs_oops1")
                             end
                             if (SMODS.Mods["DiceSeal"] or {}).can_load then
-                                table.insert(options, "c_oops6")
+                                table.insert(options, "c_dice_oops6")
                             end
                             if (SMODS.Mods["SilverSeal"] or {}).can_load then
-                                table.insert(options, "c_clone")
+                                table.insert(options, "c_silver_clone")
                             end
                             if (SMODS.Mods["Pokermon"] or {}).can_load then
                                 table.insert(options, "c_poke_obituary")
@@ -723,6 +723,9 @@ SMODS.Joker{
                             if (SMODS.Mods["Cryptid"] or {}).can_load then
                                 table.insert(options, "c_cry_typhoon")
                                 table.insert(options, "c_cry_source")
+                            end
+                            if (SMODS.Mods["MintysSillyMod"] or {}).can_load then
+                                table.insert(options, "c_minty_6years")
                             end
                             local to_create = pseudorandom_element(options, pseudoseed('sticker'))
                             local new_card = create_card('Spectral', G.consumeables, nil, nil, nil, nil, to_create)
