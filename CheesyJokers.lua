@@ -1912,7 +1912,7 @@ Card.update = function(self, dt)
         end
         if self.ability.name == "Joker Stencil" then
             self.ability.x_mult = stencil_count
-        elseif self.ability.extra.stencils then
+        elseif type(self.ability.extra) == "table" and self.ability.extra.stencils then
             self.ability.extra.stencils = stencil_count
         end
     end
