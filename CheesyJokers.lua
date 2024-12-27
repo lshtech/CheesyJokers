@@ -773,7 +773,7 @@ SMODS.Joker{
         if context.discard then
             if pseudorandom('balloon') < G.GAME.probabilities.normal / card.ability.extra.odds then
                 local other_card = context.other_card
-                local suit = SMODS.Suits[_card.base.suit].card_key
+                local suit = SMODS.Suits[other_card.base.suit].card_key
                 local rank = other_card.base.id == 14 and 2 or math.min(other_card.base.id + 1, 14)
                 if rank < 10 then rank = tostring(rank)
                 elseif rank == 10 then rank = 'T'
